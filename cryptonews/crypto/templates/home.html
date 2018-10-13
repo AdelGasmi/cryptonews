@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Welcome to CryptoNews Website</h1>
+        <p class="lead">This is a simple and interactive application where you find news, do comparisons, and be
+            updated of the magical crypto currency world.</p>
+    </div>
+</div>
+
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">24h High</th>
+            <th scope="col">24h Low</th>
+            <th scope="col">Market Cap</th>
+        </tr>
+    </thead>
+
+    {% for key, value in api_prices.DISPLAY.items %}
+
+
+    <tbody>
+        <tr>
+            <td style="color: purple;">{{ key }}</td>
+            <td>{{ value.EUR.PRICE }}</td>
+            <td>{{ value.EUR.HIGHDAY }}</td>
+            <td>{{ value.EUR.LOWDAY }}</td>
+            <td>{{ value.EUR.MKTCAP }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+<div class="container">
+    <div class="row">
+        {% for news in api_news.Data %}
+        <div class="col-lg-4 col-sm-6    col-xs-12">
+
+            <div class="card" style="">
+                <img class="card-img-top" src="{{ news.imageurl }}" alt="{{ news.source }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ news.title }}</h5>
+                    <p class="card-text">{{ news.body }}</p>
+                    <a href="{{ news.url }}" target="_blank" class="btn btn-success">Read more..</a>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endblock %}
